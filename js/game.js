@@ -81,7 +81,6 @@ function check_garage_collisions(){
     }
 }
 
-
 function check_correct_parking(){
     parking_area = {
         x_0: garage[5].x + block_size, 
@@ -95,6 +94,7 @@ function check_correct_parking(){
         hero.x >= parking_area.x_0 &&
         hero.y >= parking_area.y_0)  {
         score.value += 10
+        direction = null
         hero.x = gamefield_Width - 98
         hero.y = gamefield_Height - 68
     }
@@ -152,9 +152,4 @@ function update_scene(){
     move_hero(direction)
 }
 
-function main_loop(){
-    update_scene()
-    render_scene()
-}
-
-let game = setInterval(main_loop, 20)
+export { update_scene, render_scene }
