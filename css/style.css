@@ -2,6 +2,10 @@ canvas {
     display: block;
     margin: 0 auto;
 }
+table {
+    display: block;
+    margin: 0 auto;
+}
 h1 {
     text-align:center;
 }

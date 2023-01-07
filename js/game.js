@@ -1,8 +1,8 @@
 const canvas = document.getElementById('game')
 const ctx = canvas.getContext('2d')
 
-let gamefield_Width = ctx.canvas.clientWidth;
-let gamefield_Height = ctx.canvas.clientHeight;
+let gamefield_Width = ctx.canvas.clientWidth
+let gamefield_Height = ctx.canvas.clientHeight
 
 document.addEventListener('keydown', get_direction)
 let direction = null
@@ -38,6 +38,14 @@ let hero = {
     x: gamefield_Width - 98, 
     y: gamefield_Height - 68
 }
+
+let KEYS = {
+    UP: [38, 87], 
+    DOWN: [40, 83],
+    LEFT : [37, 65],
+    RIGHT: [39, 68],
+    STOP: [32]
+} 
 
 let garage = []
 function generate_garage(start_x, start_y){
@@ -100,16 +108,17 @@ function check_correct_parking(){
     }
 }
 
+
 function get_direction(event){
-    if(event.keyCode == 37 || event.keyCode == 65)
+    if (KEYS.LEFT.includes(event.keyCode))
         direction = 'left'
-    else if(event.keyCode == 38 || event.keyCode == 87)
+    else if (KEYS.UP.includes(event.keyCode))
         direction = 'up'
-    else if(event.keyCode == 39 || event.keyCode == 68)
+    else if(KEYS.RIGHT.includes(event.keyCode))
         direction = 'right'
-    else if(event.keyCode == 40 || event.keyCode == 83)
+    else if (KEYS.DOWN.includes(event.keyCode))
         direction = 'down'
-    else if(event.keyCode == 32)
+    else if(KEYS.STOp.includes(event.keyCode))
         direction = null
 }
 
@@ -137,11 +146,8 @@ function render_scene(){
     ctx.drawImage(background_image, 0, 0)
     for (let i = 0; i < garage.length; i++){
         ctx.drawImage(block_image, garage[i].x, garage[i].y, block_size, block_size)
-        //ctx.strokeRect( garage[i].x,garage[i].y, block_size, block_size)
     }
     ctx.drawImage(hero_image, hero.x - 3, hero.y - 13, 100, 100)
-    //ctx.strokeRect(hero.x, hero.y, hero.size_x, hero.size_y)
-    //ctx.strokeRect(parking_area.x_0, parking_area.y_0, parking_area.x_side, parking_area.y_side)
     draw_score()
 }
 function update_scene(){
